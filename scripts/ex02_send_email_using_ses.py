@@ -1,4 +1,4 @@
-"""Module to send an email using Amazon SES via AWS SDK boto3"""
+"""Module to send an email with & without attachment using Amazon SES via AWS SDK boto3"""
 
 # Multipurpose Internet Mail Extensions (MIME) is an Internet standard that
 # extends the format of email messages to support text in character sets other
