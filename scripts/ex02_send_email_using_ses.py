@@ -24,8 +24,8 @@ from email.mime.application import MIMEApplication  # class MIMEApplication in m
 
 def main():
     """First function to be called"""
-    sender = "inderpal2406@gmail.com"
-    to = "inderpal7738@gmail.com"
+    sender = "hello@test.com"
+    to = "hi@test.com"
     timestamp = datetime.now().strftime("%a %d-%b-%Y")
     aws_region = "ap-south-1"
     subject = "Test email with attachment using Amazon SES"
@@ -43,9 +43,9 @@ def main():
     aws_session = boto3.session.Session(profile_name="aws-admin")
     ses_client = aws_session.client(service_name="ses",region_name="ap-south-1")
     response = ses_client.send_email(
-        Source="inderpal2406@gmail.com",
+        Source="hello@test.com",
         Destination={
-            "ToAddresses": ["inderpal7738@gmail.com"]
+            "ToAddresses": ["hi@test.com"]
         },
         Message={
             "Subject":{
@@ -64,8 +64,8 @@ def main():
     # Create a multipart parent container of mixed subtype.
     msg = MIMEMultipart(_subtype="mixed")
     # Add from, to & subject lines to parent container.
-    msg["From"] = "inderpal2406@gmail.com"
-    msg["To"] = "inderpal7738@gmail.com"
+    msg["From"] = "hello@test.com"
+    msg["To"] = "hi@test.com"
     msg["Subject"] = "Test email with attachment."
     # Create a multipart child container of alternative subtype.
     msg_body = MIMEMultipart(_subtype="alternative")
@@ -88,8 +88,8 @@ def main():
     # Add the attachment to the parent container.
     msg.attach(att)
     response = ses_client.send_raw_email(
-        Source="inderpal2406@gmail.com",
-        Destinations=["inderpal7738@gmail.com"],
+        Source="hello@test.com",
+        Destinations=["hi@test.com"],
         RawMessage={
             #'Data': 'From: sender@example.com\nTo: recipient@example.com\nSubject: Test email (contains an attachment)\nMIME-Version: 1.0\nContent-type: Multipart/Mixed; boundary="NextPart"\n\n--NextPart\nContent-Type: text/plain\n\nThis is the message body.\n\n--NextPart\nContent-Type: text/plain;\nContent-Disposition: attachment; filename="attachment.txt"\n\nThis is the text in the attachment.\n\n--NextPart--',
             "Data": msg.as_string()
